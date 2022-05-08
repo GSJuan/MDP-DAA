@@ -13,7 +13,13 @@ namespace MDP_DAA
             foreach (string filePath in Directory.GetFiles(folderPath, "*.txt"))
             {
 
-                Problem problema = new Problem(filePath);
+                Set problema = new Set(filePath);
+                float[] centroid = problema.Centre();
+
+                for(int i = 0; i < centroid.Length; i++)
+                {
+                    Console.WriteLine(centroid[i]);
+                }
             }
         }
     }
