@@ -1,0 +1,14 @@
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.exe
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.deps.json
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.runtimeconfig.json
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.runtimeconfig.dev.json
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.dll
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\bin\Debug\netcoreapp3.1\MDP-DAA.pdb
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.csproj.AssemblyReference.cache
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.AssemblyInfoInputs.cache
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.AssemblyInfo.cs
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.csproj.CoreCompileInputs.cache
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.dll
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.pdb
+C:\Users\Juan\source\repos\MDP-DAA\MDP-DAA\obj\Debug\netcoreapp3.1\MDP-DAA.genruntimeconfig.cache
