@@ -52,5 +52,15 @@ namespace MDP_DAA
             this.set.Remove(removed);
             this.nbElements--;
         }
+
+        public static Problem operator -(Problem problema, Solution solution)
+        {
+            Problem result = new Problem(problema); 
+            for(int i = 0; i < solution.set.Count; i++)
+            {
+                result.RemoveElement(solution.set[i]);
+            }
+            return result;
+        }
     }
 }

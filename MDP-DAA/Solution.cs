@@ -67,5 +67,28 @@ namespace MDP_DAA
             }
             return elements;
         }
+
+        public double SimulateDistance(List<double> element, int index)
+        {
+            Utils utils = new Utils();
+            double newDistance = this.distance;
+            for(int i = 0; i < this.nbElements; i++)
+            {
+                for (int j = i + 1; j < this.nbElements; j++)
+                {
+                    if (i == index)
+                    {
+                        newDistance += utils.Distance(element, this.set[j]);
+                        newDistance -= utils.Distance(this.set[i], this.set[j]);
+                    }
+                    else if (j == index)
+                    {
+                        newDistance += utils.Distance(this.set[i], element);
+                        newDistance -= utils.Distance(this.set[i], this.set[j]);
+                    }
+                }
+            }
+            return newDistance;
+        }
     }
 }
