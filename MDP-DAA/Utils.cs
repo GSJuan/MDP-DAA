@@ -63,5 +63,18 @@ namespace MDP_DAA
 
             return sum;
         }
+
+        public  double CalculateDistance(Solution solution)
+        {
+            double distance = 0;
+            for (int i = 0; i < solution.nbElements - 1; i++)
+            {
+                for (int j = i + 1; j < solution.nbElements; j++)
+                {
+                    distance += Distance(solution.set[i], solution.set[j]);
+                }
+            }
+            return distance;
+        }
     }
 }

@@ -41,12 +41,12 @@ namespace MDP_DAA
                         furthestElement = problem.set[i];
                     }
                 }
-                solution.distance += maxDistance;
                 solution.AddElement(new List<double> (furthestElement));
                 problem.RemoveElement(furthestElement);
                 center = util.Center(solution);
             } while (solution.nbElements < m);
 
+            solution.distance = util.CalculateDistance(solution);
             return solution;
         }
     }
