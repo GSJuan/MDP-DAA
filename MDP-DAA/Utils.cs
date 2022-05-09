@@ -9,10 +9,10 @@ namespace MDP_DAA
         /**
          * Method to calculate the euclidean distance between to elements
          */
-        public float Distance(float[] a, float[] b)
+        public double Distance(List<double> a, List<double> b)
         {
-            float sum = 0;
-            int size = a.Length;
+            double sum = 0;
+            int size = a.Count;
             for (int i = 0; i < size; i++)
             {
                 sum += (a[i] - b[i]) * (a[i] - b[i]);
@@ -24,7 +24,7 @@ namespace MDP_DAA
          * Method to calculate the gravity center of the set
          * returns the gravity center array
          */
-        public List<double> Centre(Problem problem)
+        public List<double> Center(Problem problem)
         {
             int setSize = problem.nbElements; // n
             List<double> sum = new List<double>();
@@ -44,7 +44,7 @@ namespace MDP_DAA
             return sum;
         }
         
-        public List<double> Centre(Solution solution)
+        public List<double> Center(Solution solution)
         {
             int setSize = solution.nbElements; // n
             List<double> sum = new List<double>();

@@ -29,9 +29,28 @@ namespace MDP_DAA
                 string[] line = lines[i].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
                 for (int j = 0; j < line.Length; j++)
                 {                    
-                    set[i - 2].Add(float.Parse(line[j]));
+                    set[i - 2].Add(double.Parse(line[j]));
                 }                
             }
-        }        
+        }
+        
+        public Problem (Problem oldProblem)
+        {
+            this.nbElements = oldProblem.nbElements;
+            this.dimension = oldProblem.dimension;
+            this.set = new List<List<double>>(oldProblem.set);
+        }
+
+        public void RemoveElement(int index)
+        {
+            this.set.RemoveAt(index);
+            this.nbElements--;
+        }
+
+        public void RemoveElement(List<double> removed)
+        {
+            this.set.Remove(removed);
+            this.nbElements--;
+        }
     }
 }

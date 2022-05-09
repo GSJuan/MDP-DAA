@@ -20,5 +20,34 @@ namespace MDP_DAA
          * 9: until (|S| = m)
          * 10: Devolver S;
          */
+        
+        public Solution GreedyConstruction(Problem ogProblem, int m)
+        {
+            Utils util = new Utils();
+            Problem problem = new Problem(ogProblem);
+            List<double> center = util.Center(problem);            
+            Solution solution = new Solution();
+            do
+            {
+                double maxDistance = 0;
+                List<double> furthestElement = new List<double>();
+
+                for (int i = 0; i < problem.set.Count; i++)
+                {
+                    double distance = util.Distance(problem.set[i], center);
+                    if (distance > maxDistance)
+                    {
+                        maxDistance = distance;
+                        furthestElement = problem.set[i];
+                    }
+                }
+                solution.distance += maxDistance;
+                solution.AddElement(new List<double> (furthestElement));
+                problem.RemoveElement(furthestElement);
+                center = util.Center(solution);
+            } while (solution.nbElements < m);
+
+            return solution;
+        }
     }
 }
