@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace MDP_DAA
@@ -12,11 +13,11 @@ namespace MDP_DAA
 
             foreach (string filePath in Directory.GetFiles(folderPath, "*.txt"))
             {
+                Utils utils = new Utils();
+                Problem problema = new Problem(filePath);
+                List<double> centroid = utils.Centre(problema);
 
-                Set problema = new Set(filePath);
-                float[] centroid = problema.Centre();
-
-                for(int i = 0; i < centroid.Length; i++)
+                for(int i = 0; i < centroid.Count; i++)
                 {
                     Console.WriteLine(centroid[i]);
                 }
