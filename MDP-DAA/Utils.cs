@@ -7,7 +7,7 @@ namespace MDP_DAA
     public class Utils
     {
         /**
-         * Method to calculate the euclidean distance between to elements
+         * Method to calculate the euclidean distance between two elements
          */
         public double Distance(List<double> a, List<double> b)
         {

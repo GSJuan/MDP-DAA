@@ -9,9 +9,11 @@ namespace MDP_DAA
         public int nbElements;
         public int dimension;
         public List<List<double>> set = new List<List<double>>();
-        
+        public List<List<double>> distanceMatrix = new List<List<double>>();
+
         public Problem(string fileName)
         {
+            Utils util = new Utils();
             string[] lines = System.IO.File.ReadAllLines(fileName);
             string[] firstLine = lines[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
             string[] secondLine = lines[1].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
@@ -31,6 +33,15 @@ namespace MDP_DAA
                 {                    
                     set[i - 2].Add(double.Parse(line[j]));
                 }                
+            }
+
+            for (int i = 0; i < nbElements - 1; i++)
+            {
+                distanceMatrix.Add(new List<double>());
+                for (int j = i + 1; j < nbElements; j++)
+                {
+                    distanceMatrix[i].Add(util.Distance(set[i], set[j]));
+                }
             }
         }
         

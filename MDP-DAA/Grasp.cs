@@ -12,7 +12,7 @@ namespace MDP_DAA
             Solution solution = GraspConstruction(problem, m);
             Solution bestSolution = solution;
             int limit = 0;
-            while (limit <= 1000)
+            while (limit <= 100)
             {
                 limit++;
                 Solution newSolution = local.Search(solution);
