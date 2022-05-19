@@ -10,7 +10,7 @@ namespace MDP_DAA
         public int level;
         public double upperBound = 0;
         List<List<double>> distanceMatrix;
-        double diversity = 0;
+        public double diversity = 0;
         public int id = 0;
         int m = 0;
 
@@ -48,10 +48,10 @@ namespace MDP_DAA
             {
                 for (int j = i + 1; j < indexList.Count; j++)
                 {
-                    diversity += distanceMatrix[indexList[i]][indexList[j]];
-                    upperBound += diversity;
+                    diversity += distanceMatrix[indexList[i]][indexList[j]];                    
                 }
             }
+            upperBound = diversity;
         }
         internal double getCost()
         {
@@ -81,6 +81,7 @@ namespace MDP_DAA
                         max = totalAdd;
                 }                
             }
+            
             int weight = indexList.Count * (m - indexList.Count);
             weight += ((m - indexList.Count) * ((m - indexList.Count) - 1)) / 2;
             upperBound += (max * weight);

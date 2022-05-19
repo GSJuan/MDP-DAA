@@ -23,30 +23,32 @@ namespace MDP_DAA
         public Solution Solve(Problem problema, int m) 
         {
             Utils util = new Utils();
-            Tree tree = new Tree(problema, ref distanceMatrix, m, depth); // true en profundidad, false por cota
+            Tree tree = new Tree(problema, m, depth); // true en profundidad, false por cota
+            tree.bestUpperBound = lowerBound;
             tree.InitializeActiveNodes();
 
             while (tree.expandableNodes.Count > 0)
             {
                 PartialSolution currentNode = tree.GetNextNode();
-
                 /*
-                if (currentNode.IsComplete(m))
+                if (currentNode.IsComplete())
                 {
-                    if (currentNode.getCost() > lowerBound)
+                    if (currentNode.upperBound > lowerBound)
                     {
-                        lowerBound = currentNode.getCost();
+                        lowerBound = currentNode.upperBound;
                         Console.WriteLine("Lower bound: " + lowerBound);
                     }
+                    
                 }
                 else
                 {
-                    List<PartialSolution> newNodes = Expand(currentNode, m);
-                    activeNodes.AddRange(newNodes);
+                    tree.ExpandNode(currentNode);
+                    tree.Prune();
                 }*/
-
+                
                 tree.ExpandNode(currentNode);
                 tree.Prune();
+               
 
             }
             if(tree.bestSolution != null)

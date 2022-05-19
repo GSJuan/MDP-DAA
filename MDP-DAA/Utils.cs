@@ -81,6 +81,7 @@ namespace MDP_DAA
         {
             Solution solucion = new Solution();
             solucion.nbElements = newSolution.indexList.Count;
+            solucion.diversity = newSolution.diversity;
             for (int i = 0; i < newSolution.indexList.Count; i++)
             {
                 solucion.set.Add(problema.set[newSolution.indexList[i]]);                

@@ -59,7 +59,7 @@ namespace MDP_DAA
             this.dimension = oldProblem.dimension;
             this.set = new List<List<double>>(oldProblem.set);
         }
-
+        
         public void RemoveElement(int index)
         {
             this.set.RemoveAt(index);
@@ -68,8 +68,11 @@ namespace MDP_DAA
 
         public void RemoveElement(List<double> removed)
         {
-            this.set.Remove(removed);
-            this.nbElements--;
+            if (this.set.Contains(removed))
+            {
+                this.set.Remove(removed);
+                this.nbElements--;
+            }
         }
 
         public static Problem operator -(Problem problema, Solution solution)

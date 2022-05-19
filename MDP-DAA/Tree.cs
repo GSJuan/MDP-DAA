@@ -13,16 +13,14 @@ namespace MDP_DAA
         List<List<double>> distanceMatrix;
         public PartialSolution bestSolution;
 
-        double bestUpperBound;
-        
-
+        public double bestUpperBound = 0;
         int currentDepth = 0;
         int finalDepth;
         bool depth;
 
-        public Tree (Problem problema, ref List<List<double>> distanceMatrix, int m, bool depth)
+        public Tree (Problem problema, int m, bool depth)
         {
-            this.distanceMatrix = distanceMatrix;
+            this.distanceMatrix = problema.distanceMatrix;
             finalDepth = m;
             this.depth = depth;
             this.problema = problema;
@@ -79,7 +77,7 @@ namespace MDP_DAA
         {
             for(int i = 0; i < expandableNodes.Count; i++)
             {
-                if(expandableNodes[i].upperBound <  bestUpperBound)
+                if(expandableNodes[i].upperBound <  this.bestUpperBound)
                 {
                     expandableNodes.RemoveAt(i);
                 }
@@ -88,7 +86,7 @@ namespace MDP_DAA
 
         public void ExpandNode(PartialSolution node)
         {
-            expandableNodes.Remove(node);
+            this.expandableNodes.Remove(node);
 
             int numberOfNodes = (distanceMatrix.Count - (finalDepth - node.indexList.Count) - node.id);
             for(int i = node.id + 1; i < numberOfNodes + 1 + node.id; i++)
@@ -106,10 +104,10 @@ namespace MDP_DAA
 
                 if (newNode.IsComplete())
                 {
-                    if (newNode.upperBound < bestUpperBound)
+                    if (newNode.upperBound > this.bestUpperBound)
                     {
-                        bestUpperBound = newNode.upperBound;
-                        bestSolution = newNode;
+                        this.bestUpperBound = newNode.upperBound;
+                        this.bestSolution = newNode;
                     }
                 }
                 else

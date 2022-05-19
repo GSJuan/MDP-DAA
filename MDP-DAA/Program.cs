@@ -30,22 +30,22 @@ namespace MDP_DAA
                 Problem problema = new Problem(filePath);
 
                 for (int i = 2; i <= 6; i++)
-                {
-                    //timer.Restart();
-                    //Solution greedySolution = greedy.GreedyConstruction(problema, i);                                     
-                    //timer.Stop();
-                    //table.PrintRow(name[name.Length - 1], problema.nbElements.ToString(), problema.dimension.ToString(), i.ToString(), greedySolution.diversity.ToString(), $"{timer.ElapsedMilliseconds}");
-                    //table.PrintLine();
-
-                    //timer.Restart();
+                {/*
+                    timer.Restart();
+                    Solution greedySolution = greedy.GreedyConstruction(problema, i);
+                    timer.Stop();
+                    table.PrintRow(name[name.Length - 1], problema.nbElements.ToString(), problema.dimension.ToString(), i.ToString(), greedySolution.diversity.ToString(), $"{timer.ElapsedMilliseconds}");
+                    table.PrintLine();
+                    */
+                    timer.Restart();
                     Solution graspSolution = grasp.Solve(problema, i);
-                    //timer.Stop();
-                    //table.PrintRow(name[name.Length - 1], problema.nbElements.ToString(), problema.dimension.ToString(), i.ToString(), graspSolution.diversity.ToString(), $"{timer.ElapsedMilliseconds}");
-                    //table.PrintLine();
-                    // Console.WriteLine(solution.ToString());
-                    // table.PrintLine();
-                    
-                    BranchBound branchBound = new BranchBound(problema.distanceMatrix, graspSolution, false);
+                    timer.Stop();
+                    table.PrintRow(name[name.Length - 1], problema.nbElements.ToString(), problema.dimension.ToString(), i.ToString(), graspSolution.diversity.ToString(), $"{timer.ElapsedMilliseconds}");
+                    table.PrintLine();
+                    Console.WriteLine(graspSolution.ToString());
+                    table.PrintLine();
+                    /*
+                    BranchBound branchBound = new BranchBound(problema.distanceMatrix, greedySolution, true);
 
                     timer.Restart();
                     Solution branchBoundSolution = branchBound.Solve(problema, i);
@@ -53,8 +53,8 @@ namespace MDP_DAA
                     table.PrintRow(name[name.Length - 1], problema.nbElements.ToString(), problema.dimension.ToString(), i.ToString(), branchBoundSolution.diversity.ToString(), $"{timer.ElapsedMilliseconds}");
                     table.PrintLine();
 
-                    Console.WriteLine(branchBoundSolution.ToString());
-
+                    //Console.WriteLine(branchBoundSolution.ToString());
+                    */
                     table.PrintSeparatingLine();
                 }
             }
