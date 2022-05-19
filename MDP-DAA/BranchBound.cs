@@ -9,6 +9,7 @@ namespace MDP_DAA
     {
         double lowerBound = 0;
         List<List<double>> distanceMatrix;
+        bool depth;
         
         BranchBound(List<List<double>> distanceMatrix, double lowerBound)
         {
@@ -18,13 +19,14 @@ namespace MDP_DAA
         
         public Solution Solve(Problem problema, int m) 
         {
-            List<PartialSolution> activeNodes = InitializeActiveNodes(problema);
+            Tree tree = new Tree(ref distanceMatrix, m, false); // true en profundidad, false por cota
+            tree.InitializeActiveNodes(problema);
 
-            while (activeNodes.Count > 0)
+            while (tree.expandableNodes.Count > 0)
             {
-                PartialSolution currentNode = activeNodes.First();
-                activeNodes.Remove(currentNode);
+                PartialSolution currentNode = tree.GetNextNode();
 
+                /*
                 if (currentNode.IsComplete(m))
                 {
                     if (currentNode.getCost() > lowerBound)
@@ -37,62 +39,19 @@ namespace MDP_DAA
                 {
                     List<PartialSolution> newNodes = Expand(currentNode, m);
                     activeNodes.AddRange(newNodes);
-                }
+                }*/
+
+                tree.ExpandNode(currentNode);
+                tree.Prune();
+
             }
             Solution solution = new Solution();
             return solution;            
         }
 
-        private List<PartialSolution> Expand(PartialSolution currentNode, int m)
+        private List<PartialSolution> Expand(PartialSolution currentNode)
         {
             throw new NotImplementedException();
-        }
-
-        public List<PartialSolution> InitializeActiveNodes(Problem problema)
-        {
-            List<PartialSolution> activeNodes = new List<PartialSolution>();  
-            
-            for ( int i = 0; i < problema.set.Count; i++)
-            {
-                for (int j = i + 1; j < problema.set[i].Count; j++)
-                {
-                    List<int> subSet = new List<int>();
-                    subSet.Add(i);
-                    subSet.Add(j);
-
-                    List<int> candidates = Enumerable.Range(0, problema.set.Count).ToList();
-                    candidates.Remove(i);
-                    candidates.Remove(j);
-                    
-                    double upperBound = CalculateUpperBound(subSet, candidates);
-                    PartialSolution newNode = new PartialSolution(subSet, upperBound, ref distanceMatrix);
-                    activeNodes.Add(newNode);
-                }
-            }
-
-            return activeNodes;
-        }
-        
-        public double CalculateUpperBound(List<int> partialSolution, List<int> candidates)
-        {
-            double upperBound = 0;
-
-            for (int i = 0; i < partialSolution.Count - 1; i++)
-            {
-                for (int j = i + 1; j < partialSolution.Count; j++)
-                {
-                    upperBound += distanceMatrix[partialSolution[i]][partialSolution[j]];
-                }
-            }
-
-            for (int i = 0; i < partialSolution.Count; i++)
-            {                
-                for (int j = 0; j < candidates.Count; j++)
-                {
-                    upperBound += distanceMatrix[partialSolution[i]][candidates[j]];
-                }
-            }
-            return upperBound;
-        }
+        }        
     }
 }
