@@ -46,7 +46,7 @@ namespace MDP_DAA
                 center = util.Center(solution);
             } while (solution.nbElements < m);
 
-            solution.distance = util.CalculateDistance(solution);
+            solution.diversity = util.CalculateDistance(solution);
             return solution;
         }
     }

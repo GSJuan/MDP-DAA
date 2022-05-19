@@ -12,23 +12,28 @@ namespace MDP_DAA
         List<List<double>> distanceMatrix;
         double diversity = 0;
         public int id = 0;
+        int m = 0;
 
-        public PartialSolution(List<int> indexList, ref List<List<double>> distanceMatrix)
+        public PartialSolution(List<int> indexList, ref List<List<double>> distanceMatrix, int m)
         {
             level = indexList.Count;
             this.distanceMatrix = distanceMatrix;
+            this.indexList = indexList;
+            this.m = m;
             calculateCost();
         }
 
-        public PartialSolution(List<int> indexList, ref List<List<double>> distanceMatrix, int id)
+        public PartialSolution(List<int> indexList, ref List<List<double>> distanceMatrix, int id, int m)
         {
             level = indexList.Count;
             this.distanceMatrix = distanceMatrix;
+            this.indexList = indexList;
             this.id = id;
+            this.m = m;
             calculateCost();
         }
 
-        internal bool IsComplete(int m)
+        internal bool IsComplete()
         {
             if (level == m)
             {
@@ -52,20 +57,33 @@ namespace MDP_DAA
         {
             return diversity;
         }
-        public void CalculateUpperBound(List<int> candidates)
+        public void CalculateUpperBound(List<int> candidates, int m)
         {
             double max = 0;
-            for (int j = 0; j < candidates.Count; j++)
+            for (int i = 0; i < indexList.Count; i++)
+            {
+                double currentDistance = 0;
+                for (int j = 0; j < candidates.Count; j++)
+                {
+                    currentDistance = distanceMatrix[indexList[i]][candidates[j]];
+                    if (currentDistance > max)
+                        max = currentDistance;
+                }                
+            }
+
+            for (int i = 0; i < candidates.Count; i++)
             {
                 double totalAdd = 0;
-                for (int i = 0; i < indexList.Count; i++)
+                for (int j = i + 1; j < candidates.Count; j++)
                 {
-                    totalAdd += distanceMatrix[indexList[i]][candidates[j]];                    
-                }
-                if (totalAdd > max)
-                    max = totalAdd;
+                    totalAdd = distanceMatrix[candidates[i]][candidates[j]];
+                    if (totalAdd > max)
+                        max = totalAdd;
+                }                
             }
-            upperBound += (max * candidates.Count);
+            int weight = indexList.Count * (m - indexList.Count);
+            weight += ((m - indexList.Count) * ((m - indexList.Count) - 1)) / 2;
+            upperBound += (max * weight);
         }
     }
 }

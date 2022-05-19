@@ -16,7 +16,7 @@ namespace MDP_DAA
             {
                 limit++;
                 Solution newSolution = local.Search(solution);
-                if(newSolution.distance > bestSolution.distance) 
+                if(newSolution.diversity > bestSolution.diversity) 
                 {
                     bestSolution = newSolution;
                     limit = 0;
@@ -60,7 +60,7 @@ namespace MDP_DAA
                 center = util.Center(solution);
             } while (solution.nbElements < m);
 
-            solution.distance = util.CalculateDistance(solution);
+            solution.diversity = util.CalculateDistance(solution);
             return solution;
         }
     }

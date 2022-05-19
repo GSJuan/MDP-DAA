@@ -76,5 +76,17 @@ namespace MDP_DAA
             }
             return distance;
         }
+
+        public Solution convertToSolution(Problem problema, PartialSolution newSolution)
+        {
+            Solution solucion = new Solution();
+            solucion.nbElements = newSolution.indexList.Count;
+            for (int i = 0; i < newSolution.indexList.Count; i++)
+            {
+                solucion.set.Add(problema.set[newSolution.indexList[i]]);                
+            }
+            solucion.dimension = problema.dimension;
+            return solucion;
+        }
     }
 }

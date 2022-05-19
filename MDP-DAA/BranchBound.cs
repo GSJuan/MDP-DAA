@@ -8,19 +8,23 @@ namespace MDP_DAA
     public class BranchBound
     {
         double lowerBound = 0;
+        private Solution initialSolution;
         List<List<double>> distanceMatrix;
-        bool depth;
+        public bool depth = false;
         
-        BranchBound(List<List<double>> distanceMatrix, double lowerBound)
+        public BranchBound(List<List<double>> distanceMatrix, Solution solucion, bool depth)
         {
-            this.lowerBound = lowerBound;
+            this.lowerBound = solucion.diversity;
+            this.initialSolution = solucion;
             this.distanceMatrix = distanceMatrix;
+            this.depth = depth;
         }
         
         public Solution Solve(Problem problema, int m) 
         {
-            Tree tree = new Tree(ref distanceMatrix, m, false); // true en profundidad, false por cota
-            tree.InitializeActiveNodes(problema);
+            Utils util = new Utils();
+            Tree tree = new Tree(problema, ref distanceMatrix, m, depth); // true en profundidad, false por cota
+            tree.InitializeActiveNodes();
 
             while (tree.expandableNodes.Count > 0)
             {
@@ -45,13 +49,12 @@ namespace MDP_DAA
                 tree.Prune();
 
             }
-            Solution solution = new Solution();
-            return solution;            
-        }
+            if(tree.bestSolution != null)
+            {
+                return util.convertToSolution(problema, tree.bestSolution);
+            }
 
-        private List<PartialSolution> Expand(PartialSolution currentNode)
-        {
-            throw new NotImplementedException();
-        }        
+            return this.initialSolution;       
+        }   
     }
 }

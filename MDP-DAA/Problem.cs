@@ -35,12 +35,20 @@ namespace MDP_DAA
                 }                
             }
 
-            for (int i = 0; i < nbElements - 1; i++)
+            for (int i = 0; i < nbElements; i++)
             {
                 distanceMatrix.Add(new List<double>());
-                for (int j = i + 1; j < nbElements; j++)
+                for (int j = 0; j < nbElements; j++)
                 {
-                    distanceMatrix[i].Add(util.Distance(set[i], set[j]));
+                    if (i == j)
+                    {
+                        distanceMatrix[i].Add(0);
+                    }
+                    else
+                    {
+                        distanceMatrix[i].Add(util.Distance(set[i], set[j]));
+                    }
+
                 }
             }
         }

@@ -12,7 +12,7 @@ namespace MDP_DAA
             bool improve;
             int firstIndex;
             int secondIndex;
-            double bestDistance = solution.distance;            
+            double bestDistance = solution.diversity;            
             do
             {
                 Problem leftElements = this.problem - solution;
@@ -35,7 +35,7 @@ namespace MDP_DAA
                 }
                 if (firstIndex != -1 && secondIndex != -1)
                 {
-                    solution.distance = bestDistance;
+                    solution.diversity = bestDistance;
                     (leftElements.set[firstIndex], solution.set[secondIndex]) = (solution.set[secondIndex], leftElements.set[firstIndex]);
                     improve = true;
                 }

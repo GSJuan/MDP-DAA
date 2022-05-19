@@ -11,8 +11,10 @@ namespace MDP_DAA
         public List<PartialSolution> expandableNodes = new List<PartialSolution>();
         Problem problema;
         List<List<double>> distanceMatrix;
+        public PartialSolution bestSolution;
 
         double bestUpperBound;
+        
 
         int currentDepth = 0;
         int finalDepth;
@@ -66,8 +68,8 @@ namespace MDP_DAA
                 List<int> candidates = Enumerable.Range(0, problema.set.Count).ToList();
                 candidates.Remove(i);
 
-                PartialSolution newNode = new PartialSolution(subSet, ref distanceMatrix, i);
-                newNode.CalculateUpperBound(candidates);
+                PartialSolution newNode = new PartialSolution(subSet, ref distanceMatrix, i, finalDepth);
+                newNode.CalculateUpperBound(candidates, finalDepth);
                 generatedNodes.Add(newNode);
                 expandableNodes.Add(newNode);
             }
@@ -88,26 +90,34 @@ namespace MDP_DAA
         {
             expandableNodes.Remove(node);
 
-            int numberOfNodes = distanceMatrix.Count - (finalDepth - node.id - node.indexList.Count);
+            int numberOfNodes = (distanceMatrix.Count - (finalDepth - node.indexList.Count) - node.id);
             for(int i = node.id + 1; i < numberOfNodes + 1 + node.id; i++)
             {
-
-            }
-
-            for (int i = 0; i < problema.set.Count - finalDepth + 1; i++)
-            {
-                List<int> subSet = new List<int>();
+                List<int> subSet = new List<int>(node.indexList);
                 subSet.Add(i);
-
+                
                 List<int> candidates = Enumerable.Range(0, problema.set.Count).ToList();
-                candidates.Remove(i);
+                for (int j = 0; j < node.indexList.Count; j++)
+                {
+                    candidates.Remove(node.indexList[j]);
+                }
+                PartialSolution newNode = new PartialSolution(subSet, ref distanceMatrix, i, finalDepth);
+                newNode.CalculateUpperBound(candidates, finalDepth);
 
-                PartialSolution newNode = new PartialSolution(subSet, ref distanceMatrix, i);
-                newNode.CalculateUpperBound(candidates);
+                if (newNode.IsComplete())
+                {
+                    if (newNode.upperBound < bestUpperBound)
+                    {
+                        bestUpperBound = newNode.upperBound;
+                        bestSolution = newNode;
+                    }
+                }
+                else
+                {
+                    expandableNodes.Add(newNode);
+                }
                 generatedNodes.Add(newNode);
-                expandableNodes.Add(newNode);
             }
-
         }
     }
 }

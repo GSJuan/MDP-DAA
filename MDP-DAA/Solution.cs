@@ -9,7 +9,7 @@ namespace MDP_DAA
         public int nbElements = 0;
         public int dimension = 0;
         public List<List<double>> set = new List<List<double>>();
-        public double distance = 0;
+        public double diversity = 0;
 
         public Solution() { }
         public Solution(List<List<double>> set, int nbElements, int dimension)
@@ -50,7 +50,7 @@ namespace MDP_DAA
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("Distance: " + this.distance);
+            Console.WriteLine("Distance: " + this.diversity);
             Console.WriteLine();
         }
 
@@ -71,7 +71,7 @@ namespace MDP_DAA
         public double SimulateDistance(List<double> element, int index)
         {
             Utils utils = new Utils();
-            double newDistance = this.distance;
+            double newDistance = this.diversity;
             for(int i = 0; i < this.nbElements; i++)
             {
                 for (int j = i + 1; j < this.nbElements; j++)
